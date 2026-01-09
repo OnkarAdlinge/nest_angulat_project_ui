@@ -1,0 +1,24 @@
+<div class="main-layout">
+  <!-- Header -->
+  <header class="header">
+    <app-header></app-header>
+  </header>
+
+  <!-- Body -->
+  <div class="body">
+    <!-- Sidebar -->
+    <!-- currently sidebar is hidden with d-none class -->
+    <aside class="sidebar d-none">
+      <app-sidebar></app-sidebar>
+    </aside>
+    <!-- Main Content -->
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <app-footer></app-footer>
+  </footer>
+</div>
