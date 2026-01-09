@@ -1,1 +1,29 @@
-/* You can add global styles to this file, and also import other style files */
+/* 1️⃣ Angular Material core styles */
+@use '@angular/material' as mat;
+
+@use "./utilities";
+
+@include mat.core(); // typography & core styles
+
+/* 3️⃣ Global styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #fafafa;
+  color: #333;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 4️⃣ Optional modern tweaks */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  color: #3f51b5; // Indigo-Pink accent
+}
