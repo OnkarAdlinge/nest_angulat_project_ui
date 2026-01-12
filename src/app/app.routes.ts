@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { LoginLayout } from './layouts/login-layout/login-layout';
+import { Profile } from './shared/components/profile/profile';
 // import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
@@ -30,6 +31,11 @@ export const routes: Routes = [
       },
       { path: 'dashboard', redirectTo: '/dashboard', pathMatch: 'full' },
     ],
+  },
+  {
+    path: 'profile',
+    component: Profile,
+    // canActivate: [AuthGuard]
   },
 
   {

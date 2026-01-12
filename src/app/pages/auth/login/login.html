@@ -147,8 +147,8 @@
         </div>
 
         <!-- Submit Button -->
-        <button class="login-btn" type="submit" [disabled]="loginForm.invalid || isLoading">
-          @if (isLoading) {
+        <button class="login-btn" type="submit" [disabled]="loginForm.invalid || isLoading()">
+          @if (isLoading()) {
           <span class="loading-spinner"></span>
           <span>Signing in...</span>
           } @else {
