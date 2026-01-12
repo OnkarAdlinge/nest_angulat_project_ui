@@ -1,1 +1,156 @@
-<p>profile works!</p>
+<div class="profile-wrapper">
+  @if (!isLoading()) {
+  <div class="profile-container fade-in">
+    <!-- Header Section with Avatar -->
+    <!-- <div class="profile-header slide-in">
+      <div class="avatar-section">
+        <img [src]="avatarUrl()" alt="Profile Avatar" class="avatar-image" />
+        <div class="avatar-overlay">
+          <mat-icon>photo_camera</mat-icon>
+        </div>
+      </div>
+      <div class="header-info">
+        <h1 class="profile-title">{{ fullName() }}</h1>
+      </div>
+    </div> -->
+
+    <!-- Form Section -->
+    <form [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+      <mat-card class="profile-card slide-in-delayed">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon class="title-icon">person</mat-icon>
+            Personal Information
+          </mat-card-title>
+          <mat-card-subtitle>Update your personal details</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <div class="form-grid">
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>First Name</mat-label>
+              <input
+                matInput
+                formControlName="firstName"
+                placeholder="Enter your first name"
+                class="input-field"
+              />
+              <mat-icon matPrefix class="field-icon">badge</mat-icon>
+              @if (profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched) {
+              <mat-error>{{ getErrorMessage('firstName') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field">
+              <mat-label>Last Name</mat-label>
+              <input
+                matInput
+                formControlName="lastName"
+                placeholder="Enter your last name"
+                class="input-field"
+              />
+              <mat-icon matPrefix class="field-icon">badge</mat-icon>
+              @if (profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched) {
+              <mat-error>{{ getErrorMessage('lastName') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Email Address</mat-label>
+              <input
+                matInput
+                formControlName="email"
+                placeholder="your.email@example.com"
+                class="input-field"
+              />
+              <mat-icon matPrefix class="field-icon">email</mat-icon>
+              @if (profileForm.get('email')?.invalid && profileForm.get('email')?.touched) {
+              <mat-error>{{ getErrorMessage('email') }}</mat-error>
+              }
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="form-field full-width">
+              <mat-label>Birth Date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="birthDate"
+                placeholder="MM/DD/YYYY"
+                class="input-field"
+              />
+              <mat-icon matPrefix class="field-icon">cake</mat-icon>
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+              @if (profileForm.get('birthDate')?.invalid && profileForm.get('birthDate')?.touched) {
+              <mat-error>{{ getErrorMessage('birthDate') }}</mat-error>
+              }
+            </mat-form-field>
+          </div>
+
+          <!-- Form Status Indicator -->
+          @if (formChanged()) {
+          <div class="form-status pulse-animation">
+            <mat-icon class="warning-icon">info</mat-icon>
+            <span>You have unsaved changes</span>
+          </div>
+          }
+        </mat-card-content>
+
+        <mat-card-actions class="card-actions">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="resetForm()"
+            [disabled]="!formChanged() || isSaving()"
+            matTooltip="Discard changes"
+            class="reset-button"
+          >
+            <mat-icon>refresh</mat-icon>
+            Reset
+          </button>
+          <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="save-button"
+            [disabled]="profileForm.invalid || !formChanged() || isSaving()"
+            [ngClass]="{ 'save-enabled': formChanged() && !profileForm.invalid && !isSaving() }"
+          >
+            @if (!isSaving()) {
+            <span>Save Changes</span>
+            } @else {
+            <mat-spinner diameter="20" color="accent"></mat-spinner>
+            <span>Saving...</span>
+            }
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </form>
+
+    <!-- Additional Info Card -->
+    <mat-card class="info-card slide-in-delayed-2">
+      <mat-card-content>
+        <div class="info-item">
+          <mat-icon color="primary">verified_user</mat-icon>
+          <div class="info-text">
+            <h3>Secure & Private</h3>
+            <p>Your information is encrypted and kept confidential</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <mat-icon color="primary">sync</mat-icon>
+          <div class="info-text">
+            <h3>Auto-Sync</h3>
+            <p>Changes sync automatically across all your devices</p>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  } @else {
+  <div class="loading-container">
+    <mat-progress-spinner mode="indeterminate" color="primary" diameter="60"></mat-progress-spinner>
+    <p class="loading-text">Loading your profile...</p>
+  </div>
+  }
+</div>

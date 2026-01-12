@@ -1,9 +1,30 @@
 /* 1️⃣ Angular Material core styles */
 @use '@angular/material' as mat;
-
 @use "./utilities";
 
 @include mat.core(); // typography & core styles
+
+/* 2️⃣ Define Material 3 (M3) theme for Angular 20 */
+// Define your primary color palette
+$my-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$violet-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  typography: (
+    brand-family: 'Roboto, sans-serif',
+    plain-family: 'Roboto, sans-serif',
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+// Apply the theme to all Material components
+html {
+  @include mat.all-component-themes($my-theme);
+}
 
 /* 3️⃣ Global styles */
 html, body {
@@ -18,12 +39,140 @@ html, body {
   box-sizing: border-box;
 }
 
-/* 4️⃣ Optional modern tweaks */
+/* 4️⃣ Fix for Calendar (Datepicker) background - Material 3 classes */
+.mat-datepicker-content {
+  background-color: white !important;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 
+              0 4px 5px 0 rgba(0,0,0,.14), 
+              0 1px 10px 0 rgba(0,0,0,.12) !important;
+}
+
+.mat-calendar {
+  background-color: white !important;
+}
+
+.mat-calendar-header {
+  background-color: white !important;
+  padding: 8px !important;
+}
+
+.mat-calendar-body {
+  background-color: white !important;
+}
+
+.mat-calendar-content {
+  background-color: white !important;
+}
+
+.mat-calendar-table {
+  background-color: white !important;
+}
+
+.mat-calendar-body-cell-content {
+  background-color: transparent !important;
+  
+  &:hover {
+    background-color: rgba(99, 102, 241, 0.1) !important;
+  }
+}
+
+.mat-calendar-body-selected {
+  background-color: #6366f1 !important;
+  color: white !important;
+}
+
+.mat-calendar-body-today:not(.mat-calendar-body-selected) {
+  border: 1px solid #6366f1 !important;
+  background-color: rgba(99, 102, 241, 0.05) !important;
+}
+
+.mat-calendar-body-in-range::before {
+  background-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* 5️⃣ Fix for Tooltip background */
+.mat-mdc-tooltip {
+  background-color: rgba(97, 97, 97, 0.95) !important;
+  color: white !important;
+  font-size: 12px !important;
+  padding: 6px 12px !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+}
+
+.mat-tooltip {
+  background-color: rgba(97, 97, 97, 0.95) !important;
+  color: white !important;
+}
+
+/* 6️⃣ Fix for Dialog backdrop */
+.mat-mdc-dialog-container {
+  background-color: white !important;
+}
+
+.cdk-overlay-backdrop {
+  background-color: rgba(0, 0, 0, 0.32) !important;
+}
+
+/* 7️⃣ Fix for Select dropdown */
+.mat-mdc-select-panel {
+  background-color: white !important;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 
+              0 4px 5px 0 rgba(0,0,0,.14), 
+              0 1px 10px 0 rgba(0,0,0,.12) !important;
+}
+
+/* 8️⃣ Fix for Menu dropdown */
+.mat-mdc-menu-panel {
+  background-color: white !important;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 
+              0 4px 5px 0 rgba(0,0,0,.14), 
+              0 1px 10px 0 rgba(0,0,0,.12) !important;
+}
+
+/* 9️⃣ Optional modern tweaks */
 a {
   text-decoration: none;
   color: inherit;
 }
 
 a:hover {
-  color: #3f51b5; // Indigo-Pink accent
+  color: #6366f1;
+}
+
+/* 🔟 Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* 1️⃣1️⃣ Fix for Snackbar */
+.mat-mdc-snack-bar-container {
+  &.snackbar-success {
+    --mdc-snackbar-container-color: #10b981 !important;
+    --mat-snack-bar-button-color: #ffffff !important;
+  }
+  
+  &.snackbar-error {
+    --mdc-snackbar-container-color: #ef4444 !important;
+    --mat-snack-bar-button-color: #ffffff !important;
+  }
+  
+  &.snackbar-info {
+    --mdc-snackbar-container-color: #3b82f6 !important;
+    --mat-snack-bar-button-color: #ffffff !important;
+  }
 }
